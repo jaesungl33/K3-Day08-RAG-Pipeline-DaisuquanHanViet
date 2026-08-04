@@ -1,10 +1,15 @@
 # Student Academic Success (SAS)
 
-**Source:** https://www.rmit.edu.vn/students/support/student-academic-success
+## Metadata
 
-**Crawled:** 2026-08-04T02:59:30.343806+00:00
+- **Source:** https://www.rmit.edu.vn/students/support/student-academic-success
+- **Crawled:** 2026-08-04T02:59:30.343806+00:00
+- **Source file:** article_04.json
+- **Document type:** University news/service information
 
 ---
+
+## Content
 
 ## Student Academic Success (SAS)
 
