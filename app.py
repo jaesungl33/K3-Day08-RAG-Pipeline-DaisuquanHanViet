@@ -1,5 +1,5 @@
 """
-RAG Chatbot — University Services (Starter Template)
+RAG Chatbot — University Services
 Streamlit app kết nối RAG Retrieval (Task 9) và Generation (Task 10).
 
 Chạy:
@@ -31,6 +31,17 @@ st.set_page_config(
 )
 
 # =============================================================================
+# SESSION STATE INITIALIZATION
+# =============================================================================
+
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+    
+# Biến lưu trữ câu hỏi được chọn từ danh sách gợi ý
+if "pending_query" not in st.session_state:
+    st.session_state.pending_query = None
+
+# =============================================================================
 # SIDEBAR — INFO & SETTINGS
 # =============================================================================
 
@@ -48,9 +59,11 @@ with st.sidebar:
         "Dịch vụ hỗ trợ chỗ ở cho sinh viên như thế nào?",
         "Cách đăng ký học phần qua myRMIT?",
     ]
+    
+    # Tạo các nút bấm. Nếu người dùng bấm, lưu câu hỏi vào pending_query
     for s in suggestions:
         if st.button(s, use_container_width=True, key=f"sug_{s[:20]}"):
-            st.session_state["pending_query"] = s
+            st.session_state.pending_query = s
 
     st.divider()
     st.subheader("⚙️ Thiết lập")
@@ -61,26 +74,18 @@ with st.sidebar:
     st.caption("Hybrid Retrieval (Semantic + BM25) → RRF Rerank → PageIndex Fallback → LLM Generation có Citation")
 
 # =============================================================================
-# SESSION STATE
-# =============================================================================
-
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-if "pending_query" not in st.session_state:
-    st.session_state.pending_query = None
-
-# =============================================================================
 # MAIN CHAT AREA
 # =============================================================================
 
 st.title("🎓 University Services RAG Chatbot")
 st.caption("Hệ thống hỏi đáp thông tin dịch vụ đại học (Học phí, Học bổng, Ký túc xá, Thư viện)")
 
-# Hiển thị lịch sử chat
+# Render lịch sử hội thoại (messages từ session_state)
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
-        if msg["role"] == "assistant" and "sources" in msg and msg["sources"]:
+        # Nếu là câu trả lời của bot và có source, hiển thị trong expander
+        if msg["role"] == "assistant" and msg.get("sources"):
             with st.expander(f"📚 Nguồn tham khảo ({len(msg['sources'])} chunks)"):
                 for i, src in enumerate(msg["sources"], 1):
                     meta = src.get("metadata", {})
@@ -95,44 +100,42 @@ for msg in st.session_state.messages:
 # QUERY HANDLING
 # =============================================================================
 
-# Xử lý khi bấm nút gợi ý hoặc nhập câu hỏi mới
+# Lấy input từ thanh chat hoặc từ nút gợi ý (pending_query)
 user_input = st.chat_input("Nhập câu hỏi của bạn về chính sách/dịch vụ đại học...")
 query = user_input or st.session_state.pending_query
 
 if query:
+    # Reset pending_query để tránh lặp lại ở lần render sau
     st.session_state.pending_query = None
 
-    # Hiển thị câu hỏi của user
+    # 1. Hiển thị và lưu câu hỏi của user
     st.session_state.messages.append({"role": "user", "content": query})
     with st.chat_message("user"):
         st.markdown(query)
 
-    # Sinh câu trả lời từ RAG Pipeline
+    # 2. Xử lý câu trả lời từ Assistant
     with st.chat_message("assistant"):
         with st.spinner("Đang tìm kiếm tài liệu và tổng hợp câu trả lời..."):
             try:
-                # TODO (Học viên): Tích hợp hàm sinh câu trả lời từ Task 10
-                # Ví dụ:
-                # from src.task10_generation import generate_with_citation
-                # response = generate_with_citation(query, top_k=top_k)
-                # answer = response["answer"]
-                # sources = response.get("sources", [])
-
-                # Tạm thời mockup để test UI:
+                # Import trực tiếp hàm generation từ Task 10
                 from src.task10_generation import generate_with_citation
+                
+                # Gọi pipeline RAG
                 response = generate_with_citation(query, top_k=top_k)
                 answer = response.get("answer", "Chưa thể trả lời.")
                 sources = response.get("sources", [])
 
             except NotImplementedError:
-                answer = "⚠️ **Task 10 chưa được implement.** Hãy hoàn thành `src/task10_generation.py` để kết nối pipeline vào UI!"
+                answer = "⚠️ **Task 10 chưa hoàn thiện.** Hãy đảm bảo bạn đã hoàn thành `src/task10_generation.py`."
                 sources = []
             except Exception as e:
                 answer = f"❌ **Lỗi khi chạy RAG Pipeline:** {e}"
                 sources = []
 
+            # In câu trả lời ra UI
             st.markdown(answer)
 
+            # In Sources nếu có
             if sources:
                 with st.expander(f"📚 Nguồn tham khảo ({len(sources)} chunks)"):
                     for i, src in enumerate(sources, 1):
@@ -144,6 +147,7 @@ if query:
                         st.text(src.get("content", "")[:300] + "...")
                         st.divider()
 
+    # 3. Lưu câu trả lời vào lịch sử hội thoại
     st.session_state.messages.append({
         "role": "assistant",
         "content": answer,
