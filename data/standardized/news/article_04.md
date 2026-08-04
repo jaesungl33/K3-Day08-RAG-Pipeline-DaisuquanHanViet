@@ -3,7 +3,7 @@
 ## Metadata
 
 - **Source:** https://www.rmit.edu.vn/students/support/student-academic-success
-- **Crawled:** 2026-08-04T02:59:30.343806+00:00
+- **Crawled:** 2026-08-04T05:04:37.590405+00:00
 - **Source file:** article_04.json
 - **Document type:** University news/service information
 
