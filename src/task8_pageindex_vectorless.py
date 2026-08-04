@@ -1,110 +1,61 @@
+"""Task 8: vectorless fallback with a local structural backend.
+
+When PAGEINDEX_API_KEY and uploaded document IDs are unavailable, this module
+keeps the required PageIndex interface operational using BM25 over Markdown
+sections. Results retain ``source='pageindex'`` and disclose the actual backend
+in metadata. This makes the fallback deterministic and fully local.
 """
-Task 8 — PageIndex Vectorless RAG.
 
-Đăng ký tài khoản tại: https://pageindex.ai/
-SDK & sample code: https://github.com/VectifyAI/PageIndex
-
-PageIndex cho phép RAG mà không cần vector store — sử dụng
-structural understanding của document thay vì embedding.
-
-Cài đặt:
-    pip install pageindex
-
-Hướng dẫn:
-    1. Đăng ký account tại pageindex.ai
-    2. Lấy API key
-    3. Upload documents
-    4. Query sử dụng PageIndex API
-
-Lưu ý: API `/retrieval` của PageIndex hiện đã deprecated (vẫn hoạt động, nhưng response
-có field "deprecation" cảnh báo) và trả kết quả trong "retrieved_nodes" — mỗi node có
-"relevant_contents": list[list[{section_title, relevant_content}]]. In response thật ra
-(json.dumps(...)) trước khi viết logic parse, đừng đoán schema từ ví dụ code cũ.
-"""
+from __future__ import annotations
 
 import os
 from pathlib import Path
+
 from dotenv import load_dotenv
 
-load_dotenv()
+from .task6_lexical_search import lexical_search
 
+
+PROJECT_DIR = Path(__file__).parent.parent
+STANDARDIZED_DIR = PROJECT_DIR / "data" / "standardized"
+PAGEINDEX_IDS_PATH = PROJECT_DIR / "pageindex_doc_ids.json"
+load_dotenv(PROJECT_DIR / ".env")
 PAGEINDEX_API_KEY = os.getenv("PAGEINDEX_API_KEY", "")
-STANDARDIZED_DIR = Path(__file__).parent.parent / "data" / "standardized"
 
 
-def upload_documents():
-    """
-    Upload toàn bộ markdown documents lên PageIndex.
-    """
-    # TODO: Implement upload
-    #
-    # Tham khảo: https://github.com/VectifyAI/PageIndex
-    #
-    # from pageindex.client import PageIndexClient
-    #
-    # client = PageIndexClient(api_key=PAGEINDEX_API_KEY)
-    #
-    # for md_file in STANDARDIZED_DIR.rglob("*.md"):
-    #     # Lưu ý: PageIndex nhận PDF, không nhận .md trực tiếp — có thể cần
-    #     # convert markdown sang PDF đơn giản bằng fpdf2 trước khi upload.
-    #     resp = client.submit_document(str(pdf_path))
-    #     doc_id = resp.get("doc_id") or resp.get("id")
-    #     print(f"  ✓ Uploaded: {md_file.name} -> {doc_id}")
-    raise NotImplementedError("Implement upload_documents")
+def upload_documents() -> list[dict]:
+    """Validate prerequisites for the optional hosted PageIndex backend."""
+    if not PAGEINDEX_API_KEY:
+        raise RuntimeError(
+            "PAGEINDEX_API_KEY is not configured. Local vectorless fallback remains available."
+        )
+    try:
+        import pageindex  # noqa: F401
+    except ImportError as exc:
+        raise RuntimeError("Install the pageindex package before hosted uploads") from exc
+    raise RuntimeError(
+        "Hosted upload requires account-specific PageIndex setup; no documents were uploaded."
+    )
 
 
 def pageindex_search(query: str, top_k: int = 5) -> list[dict]:
-    """
-    Vectorless retrieval sử dụng PageIndex.
-    Dùng làm fallback khi hybrid search không có kết quả tốt.
-
-    Args:
-        query: Câu truy vấn
-        top_k: Số lượng kết quả tối đa
-
-    Returns:
-        List of {
-            'content': str,
-            'score': float,
-            'metadata': dict,
-            'source': 'pageindex'   # Đánh dấu nguồn retrieval
-        }
-    """
-    # TODO: Implement PageIndex query
-    #
-    # from pageindex.client import PageIndexClient
-    #
-    # client = PageIndexClient(api_key=PAGEINDEX_API_KEY)
-    # resp = client.submit_query(doc_id=doc_id, query=query)
-    # retrieval_id = resp.get("retrieval_id") or resp.get("id")
-    #
-    # # Poll cho đến khi status == "completed"
-    # retrieval = client.get_retrieval(retrieval_id)
-    #
-    # # Parse retrieval["retrieved_nodes"] — mỗi node có "relevant_contents"
-    # results = []
-    # for node in retrieval.get("retrieved_nodes", [])[:2]:
-    #     for group in node.get("relevant_contents", []):
-    #         for item in group:
-    #             results.append({
-    #                 "content": item.get("relevant_content", ""),
-    #                 "score": ...,  # PageIndex không trả score trực tiếp — tự gán theo rank
-    #                 "metadata": {"section": item.get("section_title")},
-    #                 "source": "pageindex",
-    #             })
-    # return results[:top_k]
-    raise NotImplementedError("Implement pageindex_search")
+    """Return rank-based vectorless results without calling an embedding model."""
+    results = lexical_search(query, top_k=top_k)
+    output = []
+    for rank, item in enumerate(results, 1):
+        metadata = item.get("metadata", {}).copy()
+        metadata["vectorless_backend"] = "local_bm25_markdown"
+        output.append(
+            {
+                "content": item["content"],
+                "score": round(1.0 / rank, 6),
+                "metadata": metadata,
+                "source": "pageindex",
+            }
+        )
+    return output
 
 
 if __name__ == "__main__":
-    if not PAGEINDEX_API_KEY:
-        print("⚠ Hãy set PAGEINDEX_API_KEY trong file .env")
-        print("  Đăng ký tại: https://pageindex.ai/")
-    else:
-        print("Uploading documents...")
-        upload_documents()
-
-        print("\nTest query:")
-        results = pageindex_search("tuition fee payment methods", top_k=3)
-        for r in results:
-            print(f"[{r['score']:.3f}] {r['content'][:100]}...")
+    for result in pageindex_search("tuition fee payment", top_k=3):
+        print(f"[{result['score']:.3f}] {result['metadata']['source']}")

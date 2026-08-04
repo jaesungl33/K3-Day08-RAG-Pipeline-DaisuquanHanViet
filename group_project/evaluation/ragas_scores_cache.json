@@ -1,0 +1,273 @@
+{
+  "metadata": {
+    "generation_model": "gpt-4o-mini",
+    "judge_model": "gpt-4o-mini",
+    "embedding_model": "text-embedding-3-small",
+    "dataset_fingerprint": "38e720958e38fba0ee373dde05b9eb84a45b8263c341de131439d32000047069",
+    "generation_fingerprint": "a31e32fb5642a1885035149e9fee1b6555e78cf9bd02b5fc45a9de54d2bd9ed3"
+  },
+  "configs": {
+    "hybrid_rrf": {
+      "summary": {
+        "faithfulness": 0.9444444444444444,
+        "answer_relevancy": 0.8796432378441326,
+        "context_recall": 1.0,
+        "context_precision": 0.9148148147533024,
+        "average": 0.9347256242604698
+      },
+      "rows": [
+        {
+          "question": "How many library items may undergraduate and postgraduate students borrow?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.9640022853970596,
+          "context_recall": 1.0,
+          "context_precision": 0.49999999995,
+          "average": 0.8660005713367649
+        },
+        {
+          "question": "What are the loan period and renewal allowance for undergraduate students?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.6226002310151723,
+          "context_recall": 1.0,
+          "context_precision": 0.9999999999,
+          "average": 0.905650057728793
+        },
+        {
+          "question": "How can a student book a library study room at RMIT?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.9534014214341432,
+          "context_recall": 1.0,
+          "context_precision": 0.999999999975,
+          "average": 0.9883503553522858
+        },
+        {
+          "question": "How far in advance can students book a library study room?",
+          "faithfulness": 0.6666666666666666,
+          "answer_relevancy": 1.0,
+          "context_recall": 1.0,
+          "context_precision": 0.5833333333041666,
+          "average": 0.8124999999927083
+        },
+        {
+          "question": "What is the maximum study-room booking duration and how many bookings may one person make?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.9904937456805848,
+          "context_recall": 1.0,
+          "context_precision": 0.99999999995,
+          "average": 0.9976234364076462
+        },
+        {
+          "question": "What happens if a student does not check in for a study-room booking on time?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.8001879510819638,
+          "context_recall": 1.0,
+          "context_precision": 0.8055555555287036,
+          "average": 0.9014358766526669
+        },
+        {
+          "question": "Does RMIT provide airport pick-up support for international students?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.8771297715690124,
+          "context_recall": 1.0,
+          "context_precision": 0.9999999999,
+          "average": 0.9692824428672531
+        },
+        {
+          "question": "When are international students assigned a buddy, and how long does the support last?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.558541989682757,
+          "context_recall": 1.0,
+          "context_precision": 0.99999999995,
+          "average": 0.8896354974081893
+        },
+        {
+          "question": "What complimentary activities does RMIT offer international students?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.9964647242378816,
+          "context_recall": 1.0,
+          "context_precision": 0.99999999995,
+          "average": 0.9991161810469704
+        },
+        {
+          "question": "What main academic support services are provided by Student Academic Success?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.8723502224672356,
+          "context_recall": 1.0,
+          "context_precision": 0.99999999995,
+          "average": 0.9680875556043089
+        },
+        {
+          "question": "Where is the Writing and Learning Centre at Saigon South, and what are its opening hours?",
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.9951655857006901,
+          "context_recall": 1.0,
+          "context_precision": 0.9999999999,
+          "average": 0.8737913964001726
+        },
+        {
+          "question": "When and where is the Learning Advisor Service available at the Hanoi campus?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.938884255422694,
+          "context_recall": 1.0,
+          "context_precision": 0.9999999999,
+          "average": 0.9847210638306735
+        },
+        {
+          "question": "What counselling support does RMIT CAPS provide to enrolled students?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.8984982283595032,
+          "context_recall": 1.0,
+          "context_precision": 0.99999999995,
+          "average": 0.9746245570773758
+        },
+        {
+          "question": "What must a student provide to register with Equitable Learning and Accessibility?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.8633533923154356,
+          "context_recall": 1.0,
+          "context_precision": 0.9999999999,
+          "average": 0.9658383480538589
+        },
+        {
+          "question": "When must University Pathway and Higher Education students pay their tuition fees?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.8635747632978558,
+          "context_recall": 1.0,
+          "context_precision": 0.8333333332916666,
+          "average": 0.9242270241473806
+        }
+      ]
+    },
+    "dense_only": {
+      "summary": {
+        "faithfulness": 0.9444444444444444,
+        "answer_relevancy": 0.8734060270998247,
+        "context_recall": 0.9,
+        "context_precision": 0.8461111110521805,
+        "average": 0.8909903956491124
+      },
+      "rows": [
+        {
+          "question": "How many library items may undergraduate and postgraduate students borrow?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.964011266216842,
+          "context_recall": 1.0,
+          "context_precision": 0.9999999999,
+          "average": 0.9910028165292105
+        },
+        {
+          "question": "What are the loan period and renewal allowance for undergraduate students?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.6226002310151723,
+          "context_recall": 1.0,
+          "context_precision": 0.9999999999,
+          "average": 0.905650057728793
+        },
+        {
+          "question": "How can a student book a library study room at RMIT?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.9999996646104604,
+          "context_recall": 1.0,
+          "context_precision": 0.8041666666465626,
+          "average": 0.9510415828142558
+        },
+        {
+          "question": "How far in advance can students book a library study room?",
+          "faithfulness": 0.5,
+          "answer_relevancy": 0.9999996846762041,
+          "context_recall": 1.0,
+          "context_precision": 0.7499999999625,
+          "average": 0.8124999211596761
+        },
+        {
+          "question": "What is the maximum study-room booking duration and how many bookings may one person make?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.9904850780179658,
+          "context_recall": 1.0,
+          "context_precision": 0.99999999995,
+          "average": 0.9976212694919915
+        },
+        {
+          "question": "What happens if a student does not check in for a study-room booking on time?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.8002161628143982,
+          "context_recall": 1.0,
+          "context_precision": 0.7499999999625,
+          "average": 0.8875540406942246
+        },
+        {
+          "question": "Does RMIT provide airport pick-up support for international students?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.8882409250779193,
+          "context_recall": 1.0,
+          "context_precision": 0.9999999999,
+          "average": 0.9720602312444798
+        },
+        {
+          "question": "When are international students assigned a buddy, and how long does the support last?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.558541989682757,
+          "context_recall": 1.0,
+          "context_precision": 0.99999999995,
+          "average": 0.8896354974081893
+        },
+        {
+          "question": "What complimentary activities does RMIT offer international students?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.9964647242378816,
+          "context_recall": 1.0,
+          "context_precision": 0.8333333332916666,
+          "average": 0.957449514382387
+        },
+        {
+          "question": "What main academic support services are provided by Student Academic Success?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.8723446173078138,
+          "context_recall": 1.0,
+          "context_precision": 0.8874999999778125,
+          "average": 0.9399611543214066
+        },
+        {
+          "question": "Where is the Writing and Learning Centre at Saigon South, and what are its opening hours?",
+          "faithfulness": 0.6666666666666666,
+          "answer_relevancy": 0.9045208544879473,
+          "context_recall": 0.5,
+          "context_precision": 0.3333333333,
+          "average": 0.6011302136136535
+        },
+        {
+          "question": "When and where is the Learning Advisor Service available at the Hanoi campus?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.9324943778746622,
+          "context_recall": 1.0,
+          "context_precision": 0.9999999999,
+          "average": 0.9831235944436656
+        },
+        {
+          "question": "What counselling support does RMIT CAPS provide to enrolled students?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.8991292928440178,
+          "context_recall": 1.0,
+          "context_precision": 0.8333333332916666,
+          "average": 0.9331156565339211
+        },
+        {
+          "question": "What must a student provide to register with Equitable Learning and Accessibility?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.8084667743354733,
+          "context_recall": 1.0,
+          "context_precision": 0.9999999999,
+          "average": 0.9521166935588683
+        },
+        {
+          "question": "When must University Pathway and Higher Education students pay their tuition fees?",
+          "faithfulness": 1.0,
+          "answer_relevancy": 0.8635747632978558,
+          "context_recall": 0.0,
+          "context_precision": 0.49999999995,
+          "average": 0.590893690811964
+        }
+      ]
+    }
+  }
+}
