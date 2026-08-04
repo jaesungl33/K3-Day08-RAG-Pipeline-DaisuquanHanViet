@@ -3,7 +3,7 @@
 ## Metadata
 
 - **Source:** https://www.rmit.edu.vn/libraryvn/borrowing-and-resources/borrowing-and-returning
-- **Crawled:** 2026-08-04T05:04:36.596976+00:00
+- **Crawled:** 2026-08-04T02:59:29.379199+00:00
 - **Source file:** article_02.json
 - **Document type:** University news/service information
 

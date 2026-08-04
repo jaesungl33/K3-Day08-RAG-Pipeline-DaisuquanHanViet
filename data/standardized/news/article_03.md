@@ -3,7 +3,7 @@
 ## Metadata
 
 - **Source:** https://www.rmit.edu.vn/libraryvn/student-support/book-a-study-room
-- **Crawled:** 2026-08-04T05:04:37.196868+00:00
+- **Crawled:** 2026-08-04T02:59:29.915289+00:00
 - **Source file:** article_03.json
 - **Document type:** University news/service information
 

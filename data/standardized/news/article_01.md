@@ -3,7 +3,7 @@
 ## Metadata
 
 - **Source:** https://www.rmit.edu.vn/study-at-rmit/international-students/international-student-support-services
-- **Crawled:** 2026-08-04T05:04:36.090444+00:00
+- **Crawled:** 2026-08-04T02:59:29.009077+00:00
 - **Source file:** article_01.json
 - **Document type:** University news/service information
 
