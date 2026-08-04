@@ -1,10 +1,15 @@
 # Wellbeing
 
-**Source:** https://www.rmit.edu.vn/student-life/support-services/wellbeing
+## Metadata
 
-**Crawled:** 2026-08-04T02:59:30.752807+00:00
+- **Source:** https://www.rmit.edu.vn/student-life/support-services/wellbeing
+- **Crawled:** 2026-08-04T02:59:30.752807+00:00
+- **Source file:** article_05.json
+- **Document type:** University news/service information
 
 ---
+
+## Content
 
 ## Wellbeing
 

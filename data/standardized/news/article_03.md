@@ -1,10 +1,15 @@
 # Book a study room
 
-**Source:** https://www.rmit.edu.vn/libraryvn/student-support/book-a-study-room
+## Metadata
 
-**Crawled:** 2026-08-04T02:59:29.915289+00:00
+- **Source:** https://www.rmit.edu.vn/libraryvn/student-support/book-a-study-room
+- **Crawled:** 2026-08-04T02:59:29.915289+00:00
+- **Source file:** article_03.json
+- **Document type:** University news/service information
 
 ---
+
+## Content
 
 ## Book a study room
 
